@@ -14,7 +14,11 @@ const SingleUserVerification = ({route,navigation}) => {
   // workshopname fetch from redux
   const workshopname = useSelector((state)=>state.workshop.workshopName);
   // userdata store in a useState array
-  const [user,setUser] = useState([]);
+  const [user,setUser] = useState({
+    name: 'Abin Sebastian',
+    email: 'abin@123',
+    mobile: '1234567890',
+  });
 // token
 const token = useSelector((state) => state.auth.token);
 
@@ -32,7 +36,7 @@ const [groupname,setGroupname] = useState('');
 
   useEffect(()=>{
     setWorkshopNamecapital(Capitalise(workshopname));
-    userDataFetch();
+    // userDataFetch();
   },[])
   // to capitalise
   function Capitalise(word) {
@@ -165,10 +169,10 @@ useEffect(()=>{
         <View style={styles.profileBox}>
             <View style={styles.nameTextTopView}>
                 <Text style={styles.nameText}>{user.name} </Text>
-                <Text style={styles.institusionText}>{groupname}</Text>
+                <Text style={styles.institusionText}>{'College of Engineering Vadakara'}</Text>
             </View> 
            <View style={{alignSelf:'center',alignItems:'center',paddingTop:20}}>
-           <Text style={styles.workshopNameStyle}>{worshopNamecapital}</Text>
+           <Text style={styles.workshopNameStyle}>{'Google Workshop'}</Text>
            </View>
             <View style={styles.tittleDetails}>
                 <Text style={styles.TittleText}>Participant Details</Text>
@@ -176,7 +180,7 @@ useEffect(()=>{
             <View style={styles.otherDetailsView}>
                 <View style={styles.iconDataView}>
                 <AntDesign name="idcard" size={20} color="black" />
-                      <Text style={styles.dataStyle}>{qrdata}</Text>
+                      <Text style={styles.dataStyle}>{'121-343-343'}</Text>
                       
                   </View>
                 <View style={styles.iconDataView}>
@@ -252,7 +256,7 @@ const styles = StyleSheet.create({
   },
   imageView:{
     position:'absolute',
-    top:'9%',
+    top:'12%',
     alignSelf:'center',
   },
   imageStyle:{ 

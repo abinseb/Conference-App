@@ -14,17 +14,43 @@ const VerifiedToNotVerify = ({route,navigation}) => {
 
  const { groupid,groupname } = route.params;
  // workshopname from redux
- const workshopname = useSelector((state) => state.workshop.workshopName);
+//  const workshopname = useSelector((state) => state.workshop.workshopName);
+// const workshopname = useSelector('Google Workshop');
 //  token 
-const token = useSelector((state) => state.auth.token);
+// const token = useSelector((state) => state.auth.token);
+const token ='edee';
 
- const [userdata,setUserData] = useState([]);
+ const [userdata,setUserData] = useState([
+    {
+        _id: 0,
+        name: 'Srikanth',
+        email: 'srikanth@123',
+        mobile: '1234567890',
+        
+    },{
+        _id: 1,
+        name: 'Srikanth',
+        email: 'srikanth@123',
+        mobile: '1234567890',
+    }
+    ,{
+        _id: 2,
+        name: 'Srikanth',
+        email: 'srikanth@123',
+        mobile: '1234567890',
+    },{
+        _id: 3,
+        name: 'Srikanth',
+        email: 'srikanth@123',
+        mobile: '1234567890',
+    }
+ ]);
 
  const [refresh, setRefresh] = useState(false);
 
 useFocusEffect(
     React.useCallback(()=>{
-        verifiedUserData();
+        // verifiedUserData();
     },[refresh])
 )
 
@@ -93,7 +119,7 @@ const navigationToprofile=()=>{
                                     <View style={styles.textView}>
                                         <Text style={styles.txt1}> {value.email}</Text>
                                         <Text style={styles.txt1}> {value.mobile}</Text>
-                                        <Text style={styles.workshopTxt}>{workshopname}</Text>
+                                        <Text style={styles.workshopTxt}>{'Google Workshop'}</Text>
                                         <Text style={styles.verifiedTxt}>Verified</Text>
                                     </View>
                                     <View style={styles.viewCheckBox}>

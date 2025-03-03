@@ -2,7 +2,7 @@ const initialState={
     workshopName:'',
 };
 
-const workshopReducer = (state = initialState,action)=>{
+const WorkshopReducer = (state = initialState,action)=>{
     switch(action.type){
         case 'SET_WORKSHOP_STRING':
             return{
@@ -14,4 +14,4 @@ const workshopReducer = (state = initialState,action)=>{
     }
 };
 
-export default workshopReducer;
+export default WorkshopReducer;

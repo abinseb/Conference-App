@@ -35,20 +35,7 @@ const Login = ({ navigation }) => {
         setShowPassword(!showPassword);
     };
 
-    const [loginstate, setLoginState] = useState(null);
-
-    const [eventDetails, setEventDetails] = useState([]);
-
     useEffect(() => {
-
-        // const {username,token} = await getUserData();
-        // if(token === null){
-        //     NetworkConnection();
-        //     // GetEventDetails_load();
-        // }
-        // else{
-        //     navigationToHome();
-        // }
         checktheAuthenticity();
     }, [])
 
@@ -95,39 +82,41 @@ const Login = ({ navigation }) => {
     }
     // authenticate login
     const authenticateEntry = async () => {
-        if (userName == '' && password == '') {
-            showAuthenticationEmpty();
-        }
-        else {
-            try {
-                const authData = await authenticate_Volunteer(userName, password);
-                // const user ={userName};
-                console.log('authenticationData', authData)
-                if (authData.status === true) {
-                    await saveUserData(authData.name, authData.token);
-                    // await createTableAndLoadDataFromServer();
-                    await showAuthenticationTrue();
-                    await navigationToHome();
+        createTableAndLoadDataFromServer();
+        // navigationToHome();
+        // if (userName == '' && password == '') {
+        //     showAuthenticationEmpty();
+        // }
+        // else {
+        //     try {
+        //         const authData = await authenticate_Volunteer(userName, password);
+        //         // const user ={userName};
+        //         console.log('authenticationData', authData)
+        //         if (authData.status === true) {
+        //             await saveUserData(authData.name, authData.token);
+        //             // await createTableAndLoadDataFromServer();
+        //             await showAuthenticationTrue();
+        //             await navigationToHome();
 
-                }
-                else {
-                    showAuthenticationFalse();
-                    console.log("Authenticationjjjjjjjjjjjjjjjjjjjjjjjjjj failed");
-                }
+        //         }
+        //         else {
+        //             showAuthenticationFalse();
+        //             console.log("Authenticationjjjjjjjjjjjjjjjjjjjjjjjjjj failed");
+        //         }
 
-            }
-            catch (errr) {
-                console.log("Authentication failed", errr);
-                // alert("Invalid user credentials");
-                showAuthenticationFalse();
-            }
-        }
+        //     }
+        //     catch (errr) {
+        //         console.log("Authentication failed", errr);
+        //         // alert("Invalid user credentials");
+        //         showAuthenticationFalse();
+        //     }
+        // }
 
     }
 
     // navigation to home if authentication is true
     const navigationToHome = () => {
-        navigation.replace('home');
+        navigation.replace('bottomTab');
     }
 
     // toast notification for login success
@@ -147,24 +136,23 @@ const Login = ({ navigation }) => {
 
 
 
-    // const createTableAndLoadDataFromServer = async () => {
-    //     try {
-    //         await Promise.all([
-    //             await Create_Event_Data_Table(),
-    //             await Create_Workshops_Table(),
-    //             await Create_user_table(),
-    //             await create__group_table(),
-    //             await insertEventTable(),
-    //             await insertWorkshopTable(),
-    //             await insert_To_UserTable(),
-    //             await Data_for_Update_UserTable(),
-    //             await create_Offline_table(),
-    //             await insert_group_table()
-    //         ]);
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // }
+    const createTableAndLoadDataFromServer = async () => {
+        try {
+            await Promise.all([
+              
+                await Create_user_table(),
+                // await create__group_table(),
+                // await insertEventTable(),
+                // await insertWorkshopTable(),
+                // await insert_To_UserTable(),
+                // await Data_for_Update_UserTable(),
+                // await create_Offline_table(),
+                // await insert_group_table()
+            ]);
+        } catch (err) {
+            console.log(err);
+        }
+    }
     return (
         <KeyboardAwareScrollView contentContainerStyle={styles.container}>
 

@@ -16,7 +16,31 @@ const NotVerifiedToVerify = ({ route,navigation }) => {
   const workshopname = useSelector((state) => state.workshop.workshopName);
 
   // userlist
-  const [userList, setUserList] = useState([]);
+  const [userList, setUserList] = useState([
+    {
+      _id: 0,
+      name: 'Srikanth',
+      email: 'srikanth@123',
+      mobile: '1234567890',
+      
+  },{
+      _id: 1,
+      name: 'Srikanth',
+      email: 'srikanth@123',
+      mobile: '1234567890',
+  }
+  ,{
+      _id: 2,
+      name: 'Srikanth',
+      email: 'srikanth@123',
+      mobile: '1234567890',
+  },{
+      _id: 3,
+      name: 'Srikanth',
+      email: 'srikanth@123',
+      mobile: '1234567890',
+  }
+  ]);
   const [isChecked, setIsChecked] = useState([]);
 
   const [refresh, setRefresh] = useState(false);
@@ -28,7 +52,7 @@ const token = useSelector((state) => state.auth.token);
   useFocusEffect(
     React.useCallback(() => {
       // Fetch and update data here
-      listOfUser_inGroup();
+      // listOfUser_inGroup();
     }, [refresh])
   );
 
@@ -108,7 +132,7 @@ function showToastNotificationverification() {
                   <View style={styles.textView}>
                     <Text style={styles.txt1}> {value.email}</Text>
                     <Text style={styles.txt1}> {value.mobile}</Text>
-                    <Text style={styles.workshopTxt}>{workshopname}</Text>
+                    <Text style={styles.workshopTxt}>{'Google Workshop'}</Text>
                   </View>
                   <View style={styles.viewCheckBox}>
                     <Checkbox

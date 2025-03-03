@@ -6,10 +6,20 @@ import { Group_list_load } from '../../../API_Communication/Load_data';
 import { group_dataFrom_groupTable } from '../../../SQLDatabaseConnection/FetchDataFromTable';
 const BulkVerification =({navigation})=>{
 
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState([{
+    id: 0,
+    name: 'College of Engineering Vadakara',
+   
+  },{
+    id: 1,
+    name: 'College of Technology Vadakara',
+  },{
+    id: 2,
+    name: 'St.Pius X College Rajapuram',
+  }]);
 
   useEffect(() => {
-    groupList_load();
+    // groupList_load();
   }, []);
 
   const groupList_load = async () => {
@@ -17,7 +27,17 @@ const BulkVerification =({navigation})=>{
       const group = await group_dataFrom_groupTable();
       const groupNames = group.map(item => ({ id: item.id, name: item.name }));
       console.log("names_____", groupNames);
-      setItems(groupNames);
+      setItems([{
+        id: 0,
+        name: 'College of Engineering Vadakara',
+       
+      },{
+        id: 1,
+        name: 'College of Technology Vadakara',
+      },{
+        id: 2,
+        name: 'St.Pius X College Rajapuram',
+      }]);
     } catch (error) {
       console.error("Error loading group list:", error);
     }

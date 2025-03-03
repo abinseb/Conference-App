@@ -11,10 +11,11 @@ const dispatch = useDispatch();
 
     const log_Out_fromDevice=async()=>{
         try{
+
             await removeUserData();
             await removeEventId();
             await dispatch(logoutSuccess());
-            await deleteAllTables();
+            // await deleteAllTables();
             await exit_App();
 
         }

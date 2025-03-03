@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import {View,Text,StyleSheet, Image,ScrollView, Dimensions,TouchableOpacity} from 'react-native';
 import { Card,Title,} from "react-native-paper";
 import {SafeAreaView} from 'react-native-safe-area-context'
-// import { useDispatch,useSelector } from "react-redux";
-// import { connect } from 'react-redux';
+import { useDispatch,useSelector } from "react-redux";
+
 
 
 // impoort workshop redux action
-// import { loginSuccess, worshopSelect } from "../../../redux/Actions";
+import { loginSuccess, worshopSelect } from "../../../redux/Actions";
 import { workshopDataFetch } from "../../../SQLDatabaseConnection/FetchDataFromTable";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getUserData } from "../../../AsyncStorage/StoreUserCredentials";
@@ -16,7 +16,7 @@ const HomePage =({navigation})=>{
 
 const [event , setEvent] = useState([]);
 // for storing data in redux we call useDispatch function for state updation
-// const dispatch = useDispatch();
+const dispatch = useDispatch();
 
 // initial rendering
    useEffect(()=>{
@@ -30,7 +30,7 @@ const [event , setEvent] = useState([]);
    const volunteerCredentials =async()=>{
       try{
          const {username,token} =await getUserData();
-         // dispatch(loginSuccess(username,token));
+         dispatch(loginSuccess(username,token));
          console.log("userName",username);
          console.log("token",token);
       }
@@ -42,6 +42,7 @@ const [event , setEvent] = useState([]);
    const workshopData = async () => {
       try {
           const workshop = await workshopDataFetch();
+          console.log("workshop----",workshop);
          
           setEvent(workshop);
       } catch (error) {
@@ -63,9 +64,9 @@ const [event , setEvent] = useState([]);
   
 
 
-// const state = useSelector((state) => state);
-// const username = state.auth.username;
-// console.log("hhiii,",username); 
+const state = useSelector((state) => state);
+const username = state.auth.username;
+console.log("hhiii,",username); 
 // calculate the widthe of each card based on the 
 const screenWidth = Dimensions.get('window').width;
 const cardWidth = (screenWidth - 40) / 2;
@@ -75,9 +76,11 @@ const cardWidth = (screenWidth - 40) / 2;
 const handleNavigation=async(workshop)=>{
    // const workshopName = await reverseCapitalise(workshop)
    console.log("workshopp****************",workshop);
-   // await dispatch(worshopSelect(workshop))
+   await dispatch(worshopSelect(workshop))
   await navigation.navigate("bottomTab");
 }
+
+
 
 // navigation To profile
 const navigationToProfile=()=>{
@@ -88,10 +91,10 @@ const navigationToProfile=()=>{
    return(
     <SafeAreaView style={styles.container}>
       <View style={styles.AppBarView}>
-         <Text style={styles.nameText}> Hello, {'Abin'}  </Text>
+         <Text style={styles.nameText}> Hello, ICT </Text>
          <TouchableOpacity style={styles.profileImageView} onPress={navigationToProfile}>
                <Image style={styles.profileImage} source={(require('./../../../images/icon2.png'))} />
-               <Text style={styles.profileName}>{'Abin'}</Text>
+               <Text style={styles.profileName}>{username}</Text>
          </TouchableOpacity>
       </View>
       <View style={styles.viewCardBox}>

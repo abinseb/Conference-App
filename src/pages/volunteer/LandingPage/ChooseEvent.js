@@ -3,10 +3,10 @@ import { View, Text, StyleSheet, Image , Alert ,BackHandler} from "react-native"
 import { SelectList } from "react-native-dropdown-select-list";
 import { EvilIcons, Entypo, AntDesign } from '@expo/vector-icons';
 import { loadAllEventData } from "../../../API_Communication/Load_data";
-import {  getUserData, saveEventId } from "../../../AsyncStorage/StoreUserCredentials";
+import {  getUserData, saveZoneId } from "../../../AsyncStorage/StoreUserCredentials";
 
 const ChooseEvent = ({navigation}) => {
-  const [selected, setSelected] = useState(null);
+  const [selectedZone, setSelectedZone] = useState("");
   const [eventList, setEventList] = useState([]);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const ChooseEvent = ({navigation}) => {
     //   console.log("display status",username,token);
     // }
     // EntryCheck()
-    loadEventData();
+    // loadEventData();
   }, []);
 
   const loadEventData = async () => {
@@ -40,19 +40,35 @@ const ChooseEvent = ({navigation}) => {
   // };
 }
 
-  const handleSelectEvent =async (evntid) => {
-    alert(evntid);
-    await saveEventId(evntid);
-    await navigationToNext('Login');
+  const handleSelectEvent =async (val) => {
+    alert(val);
+    // selectedZone(val);
+    saveZoneId(val);
+    navigationToNext('Login');
 
-    
   };
 
   const navigationToNext=(path)=>{
     navigation.navigate(path);
   }
 
-
+const zone = [
+  {
+    key:'calicut',
+          value: 'calicut',
+          disabled: false,
+  },
+  {
+    key: 'cochin',
+          value: 'cochin',
+          disabled: false,
+  }
+  ,{
+    key: 'trivandrum',
+          value: 'Trivandrum',
+          disabled: false,
+  }
+]
 
 
   // avoid backnvigation
@@ -98,11 +114,11 @@ useEffect(() => {
         <Image style={styles.image_style} source={require('../../../images/LOGO_ICTAK-ENG-ALT-White-Text.png')} />
       </View>
       <View style={styles.dropDownListContainer}>
-        <Text style={styles.textTop}>Choose the Event</Text>
+        <Text style={styles.textTop}>Select the Zone</Text>
         <SelectList
-          setSelected={setSelected}
-          data={eventList}
-          save="key"
+          setSelected={(val)=>handleSelectEvent(val)}
+          data={zone}
+          // save="key"
           searchicon={<EvilIcons name="search" size={24} color="white" />}
           inputStyles={{ color: '#fff' }}
           boxStyles={{ borderWidth: 1, borderColor: '#fff' }}
@@ -110,7 +126,7 @@ useEffect(() => {
           closeicon={<Entypo name="cross" size={24} color="white" />}
           arrowicon={<AntDesign name="down" size={24} color="white" />}
           searchPlaceholder={null}
-          onSelect={()=>handleSelectEvent(selected)}
+          // onSelect={()=>handleSelectEvent(selected)}
         />
       </View>
     </View>

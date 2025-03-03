@@ -1,8 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const saveEventId=async(eventid)=>{
+export const saveZoneId=async(eventid)=>{
     try{
-        await AsyncStorage.setItem('EventId',eventid);
+        await AsyncStorage.setItem('zone',eventid);
     }
     catch(err){
         console.error(err);
